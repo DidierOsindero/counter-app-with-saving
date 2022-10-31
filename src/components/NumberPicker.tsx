@@ -1,34 +1,41 @@
 import { useState } from "react";
 
 export default function NumberPicker(): JSX.Element {
-  const [counterValueFromCurrentRender, queueRerenderWithNewCounterValue] =
-    useState(0);
-  const [stateSavedEmojiOne, queueRerenderWithNewFavouriteValue1] =
-    useState(0);
-  const [stateSavedEmojiTwo, queueRerenderWithNewFavouriteValue2] =
-    useState(0);
+  const [stateCurrentEmoji, setStateCurrentEmoji] = useState("");
+  const [statePreviousEmoji, setStatePreviousEmoji] = useState("");
 
-  const handleAddOneToCounter = () => {
-    queueRerenderWithNewCounterValue(counterValueFromCurrentRender + 1);
+  const handleChangeEmojiToClock = () => {
+    setStatePreviousEmoji(stateCurrentEmoji);
+    setStateCurrentEmoji("⏰");
   };
 
-  const handleSubtractOneFromCounter = () => {
-    queueRerenderWithNewCounterValue(counterValueFromCurrentRender - 1);
+  const handleChangeEmojiToBed = () => {
+    setStatePreviousEmoji(stateCurrentEmoji);
+    setStateCurrentEmoji("🛌");
   };
-
-  const handleStoreCurrentCount = () => {
-    queueRerenderWithNewFavouriteValue1(counterValueFromCurrentRender);
+  const handleChangeEmojiToEgg = () => {
+    setStatePreviousEmoji(stateCurrentEmoji);
+    setStateCurrentEmoji("🍳");
+  };
+  const handleChangeEmojiToPlate = () => {
+    setStatePreviousEmoji(stateCurrentEmoji);
+    setStateCurrentEmoji("🍽️");
+  };
+  const handleChangeEmojiToCheeky = () => {
+    setStatePreviousEmoji(stateCurrentEmoji);
+    setStateCurrentEmoji("😋");
   };
 
   return (
     <>
-      <h1>Number picker</h1>
-      <p>Your stored emojis: {stateSavedEmojiOne} | {stateSavedEmojiTwo}</p>
-      <p>Counter: {counterValueFromCurrentRender}</p>
-      <button onClick={handleSubtractOneFromCounter}>-1</button>
-      <button onClick={handleAddOneToCounter}>+1</button>
-      <hr />
-      <button onClick={handleStoreCurrentCount}>Store current count</button>
+      <h1>Emoji picker</h1>
+      <p>Current Emoji: {stateCurrentEmoji}</p>
+      <p>Previous Emoji: {statePreviousEmoji}</p>
+      <button onClick={handleChangeEmojiToClock}>⏰</button>
+      <button onClick={handleChangeEmojiToBed}>🛌</button>
+      <button onClick={handleChangeEmojiToEgg}>🍳</button>
+      <button onClick={handleChangeEmojiToPlate}>🍽️</button>
+      <button onClick={handleChangeEmojiToCheeky}>😋</button>
     </>
   );
 }
