@@ -2,27 +2,27 @@ import { useState } from "react";
 
 export default function NumberPicker(): JSX.Element {
   const [stateCurrentEmoji, setStateCurrentEmoji] = useState("");
-  const [statePreviousEmoji, setStatePreviousEmoji] = useState("");
+  const [stateSavedEmojis, setStateSavedEmojis] = useState<string[]>([]);
 
   const handleChangeEmojiToClock = () => {
-    setStatePreviousEmoji(stateCurrentEmoji);
+    setStateSavedEmojis([...stateSavedEmojis, stateCurrentEmoji]);
     setStateCurrentEmoji("⏰");
   };
 
   const handleChangeEmojiToBed = () => {
-    setStatePreviousEmoji(stateCurrentEmoji);
+    setStateSavedEmojis([...stateSavedEmojis, stateCurrentEmoji]);
     setStateCurrentEmoji("🛌");
   };
   const handleChangeEmojiToEgg = () => {
-    setStatePreviousEmoji(stateCurrentEmoji);
+    setStateSavedEmojis([...stateSavedEmojis, stateCurrentEmoji]);
     setStateCurrentEmoji("🍳");
   };
   const handleChangeEmojiToPlate = () => {
-    setStatePreviousEmoji(stateCurrentEmoji);
+    setStateSavedEmojis([...stateSavedEmojis, stateCurrentEmoji]);
     setStateCurrentEmoji("🍽️");
   };
   const handleChangeEmojiToCheeky = () => {
-    setStatePreviousEmoji(stateCurrentEmoji);
+    setStateSavedEmojis([...stateSavedEmojis, stateCurrentEmoji]);
     setStateCurrentEmoji("😋");
   };
 
@@ -30,7 +30,14 @@ export default function NumberPicker(): JSX.Element {
     <>
       <h1>Emoji picker</h1>
       <p>Current Emoji: {stateCurrentEmoji}</p>
-      <p>Previous Emoji: {statePreviousEmoji}</p>
+      <p>
+        <ol>
+        Previous Emojis:{" "}
+        {stateSavedEmojis.map((emoji, index) => (
+          <li key={index}>{emoji}</li>
+        ))}
+        </ol>
+      </p>
       <button onClick={handleChangeEmojiToClock}>⏰</button>
       <button onClick={handleChangeEmojiToBed}>🛌</button>
       <button onClick={handleChangeEmojiToEgg}>🍳</button>
